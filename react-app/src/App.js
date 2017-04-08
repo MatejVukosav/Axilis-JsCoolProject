@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
+import MovieInfoComponent from './Components/MovieInfoComponent'
 import 'bootswatch/superhero/bootstrap.css';
 
 const Navigation = () => {
@@ -43,6 +44,47 @@ const Dummy404 = () => {
         </h2>
     )
 }
+
+setMovieFavorite(_id, isWatched) {
+    let newListOfMovies = this.state.movies.map(m => {
+      if (m._id !== _id) {
+        return m;
+      }
+      var newMovieObject = Object.assign({}, m, {
+        isFavorite: isFavorite
+      });
+
+      return newMovieObject;
+
+      // Equivalent but worse variant:
+      // let newObject = {
+      //   name: m.name,
+      //   _id : m._id,
+      //   isWatched: change.isWatched
+      // };
+
+    // return newMovieObject;
+    });
+
+    this.setState({
+      movies: newListOfMovies
+    });
+  }
+
+  handleLoginInputChange(event) {
+    this.setState({
+      username: event.target.value
+    });
+  }
+
+  const WrappedFavorites = () => {
+      return {
+          <DummyFavorites setMovieFavoriteChangedEvent = {this.setMovieFavorite}></DummyFavorites>
+      }
+  }
+     
+  }
+
 
 class App extends Component {
     render() {
