@@ -7,7 +7,6 @@ class Header extends Component {
         return (
             <div className="row">
                 <h1 className="col-md-12">{this.props.text}</h1><br/>
-                <SearchBox></SearchBox>
             </div>
         );
     }
