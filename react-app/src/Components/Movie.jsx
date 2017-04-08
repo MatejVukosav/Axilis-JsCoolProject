@@ -2,7 +2,18 @@ import React, {Component} from 'react';
 import {Col, Thumbnail} from 'react-bootstrap/lib';
 
 class Movie extends Component {
-    
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        let MovieInfo
+        fetch("http://www.omdbapi.com/?=" + this.props.id)
+        .then((response) => response.json())
+        .then((movie) )
+            console.
+        )
+    }
 
     render() {
         return (

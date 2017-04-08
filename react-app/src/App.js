@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
+import 'bootswatch/superhero/bootstrap.css';
 
 const Navigation = () => {
     return (
@@ -51,11 +50,7 @@ class App extends Component {
             <div className="App">
                 <Router>
                     <div>
-                        <div
-                            className="App-header"
-                            style={{
-                            float: "right"
-                        }}>
+                        <div style={{float: "right"}}>
                             <Navigation/>
                         </div>
                         <Switch>
