@@ -3,6 +3,7 @@ import SearchBox from './SearchBox';
 import MovieListBox from './MovieListBox';
 
 
+
 class SearchComponent extends Component {
   render() {
     return (
