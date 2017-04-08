@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
 import 'bootswatch/superhero/bootstrap.css';
+import Movie from './Components/Movie';
 
 const Navigation = () => {
     return (
@@ -30,7 +31,7 @@ const DummySearch = () => {
 };
 const DummyLogout = () => {
     return (
-        <h1>Logout</h1>
+        <h1><Movie id="tt0106062"/></h1>
     )
 };
 
