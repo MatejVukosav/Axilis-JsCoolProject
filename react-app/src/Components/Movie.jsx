@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 
 class Movie extends Component {
@@ -13,6 +14,24 @@ class Movie extends Component {
           </button>
       );
   }
+=======
+import React, {Component} from 'react';
+import {Col, Thumbnail} from 'react-bootstrap/lib';
+
+class Movie extends Component {
+    
+
+    render() {
+        return (
+            <Col sm={6} md={3}>
+                <Thumbnail src={this.props.image}>
+                    <h3>{this.props.title}</h3>
+                    <p>{this.props.description}</p>
+                </Thumbnail>
+            </Col>
+        );
+    }
+>>>>>>> 8be8084840d47ff61d2eaa4e5122845ac9bbbd39
 }
 
 export default Movie;
