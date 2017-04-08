@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
-import 'bootswatch/superhero/bootstrap.css';
+import logo from './logo.svg';
+import './App.css';
 
-// TODO: uredi NavLink
 const Navigation = () => {
     return (
         <div>
@@ -37,7 +37,9 @@ const DummyLogout = () => {
 
 const Dummy404 = () => {
     return (
-        <h2 style={{color: "red"}}>
+        <h2 style={{
+            color: "red"
+        }}>
             <b>404</b>: This is not the page you are looking for
         </h2>
     )
@@ -49,7 +51,11 @@ class App extends Component {
             <div className="App">
                 <Router>
                     <div>
-                        <div style={{float: "right"}}>
+                        <div
+                            className="App-header"
+                            style={{
+                            float: "right"
+                        }}>
                             <Navigation/>
                         </div>
                         <Switch>
