@@ -52,8 +52,8 @@ app.use('/login', loginRoutes);
 app.use('/', indexRoutes);
 
 //react
-app.use('/static', express.static(path.join(__dirname, 'react', 'build', 'static')));
-app.use('/*', (req, res) => res.sendFile('./react/build/index.html', {root: __dirname}));
+//app.use('/static', express.static(path.join(__dirname, 'react', 'build', 'static')));
+//app.use('/*', (req, res) => res.sendFile('./react/build/index.html', {root: __dirname}));
 
 const MONGO_STRING = "mongodb://axilis:axilis@ds155130.mlab.com:55130/ajssproject"
 

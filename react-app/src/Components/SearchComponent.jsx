@@ -4,7 +4,7 @@ import Movie from './Movie.jsx';
 class SearchComponent extends Component {
   render() {
     return (
-      
+   
     );
   }
 }

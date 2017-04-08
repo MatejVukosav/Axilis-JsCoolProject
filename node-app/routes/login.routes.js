@@ -3,9 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', {title: 'Express'});
-});
+const UserController = require('../controllers/user.controller')
+/* login */
+router.post('/', UserController.login);
 
 module.exports = router;
