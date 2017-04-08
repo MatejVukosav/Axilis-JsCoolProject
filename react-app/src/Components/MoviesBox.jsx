@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import Movie from './Movie.jsx';
 
-import Movie from './Movie.jsx';
 
-class MovieListBox extends Component {
+class MoviesBox extends Component {
     render() {
         var movieComponents = this
             .props
@@ -27,4 +26,4 @@ class MovieListBox extends Component {
     }
 }
 
-export default MovieListBox;
+export default MoviesBox;

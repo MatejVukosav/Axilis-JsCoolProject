@@ -6,10 +6,9 @@ class Movie extends Component {
     render() {
         return (
             <Col sm={6} md={3}>
-                <Thumbnail src={this.props.image}>
-                    <h3>{this.props.title}</h3>
-                    <p>{this.props.description}</p>
-                    <button onClick={this.props.setMovieFavouriteChangedEvent} className="btn btn-primary"></button>
+                <Thumbnail src="">
+                    <h2>{this.props.title}</h2>
+                    <h3>{this.props.year}</h3>
                 </Thumbnail>
             </Col>
         );
