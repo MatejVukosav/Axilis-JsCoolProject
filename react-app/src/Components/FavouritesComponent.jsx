@@ -13,3 +13,4 @@ class FavouritesComponents extends Component {
 }
 
 export default FavouritesComponents;
+

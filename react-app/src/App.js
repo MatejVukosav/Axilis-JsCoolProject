@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
+import MovieInfoComponent from './Components/MovieInfoComponent'
+import 'bootswatch/superhero/bootstrap.css';
+import Movie from './Components/Movie';
 
 const Navigation = () => {
     return (
@@ -31,7 +32,7 @@ const DummySearch = () => {
 };
 const DummyLogout = () => {
     return (
-        <h1>Logout</h1>
+        <h1><Movie id="tt0106062"/></h1>
     )
 };
 
@@ -45,17 +46,54 @@ const Dummy404 = () => {
     )
 }
 
+setMovieFavorite(_id, isWatched) {
+    let newListOfMovies = this.state.movies.map(m => {
+      if (m._id !== _id) {
+        return m;
+      }
+      var newMovieObject = Object.assign({}, m, {
+        isFavorite: isFavorite
+      });
+
+      return newMovieObject;
+
+      // Equivalent but worse variant:
+      // let newObject = {
+      //   name: m.name,
+      //   _id : m._id,
+      //   isWatched: change.isWatched
+      // };
+
+    // return newMovieObject;
+    });
+
+    this.setState({
+      movies: newListOfMovies
+    });
+  }
+
+  handleLoginInputChange(event) {
+    this.setState({
+      username: event.target.value
+    });
+  }
+
+  const WrappedFavorites = () => {
+      return {
+          <DummyFavorites setMovieFavoriteChangedEvent = {this.setMovieFavorite}></DummyFavorites>
+      }
+  }
+     
+  }
+
+
 class App extends Component {
     render() {
         return (
             <div className="App">
                 <Router>
                     <div>
-                        <div
-                            className="App-header"
-                            style={{
-                            float: "right"
-                        }}>
+                        <div style={{float: "right"}}>
                             <Navigation/>
                         </div>
                         <Switch>
