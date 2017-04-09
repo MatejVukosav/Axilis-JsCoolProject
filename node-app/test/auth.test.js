@@ -28,13 +28,16 @@ describe('## Auth APIs', () => {
         request(app.app)
             .post('/api/v1/auth/login')
             .send(validUserCredentials)
-            .expect(httpStatus.OK)
-            .then((err, res) => {
+            .end((err, res) => {
+                res
+                    .should
+                    .have
+                    .status(200);
                 done();
-            })   .catch(done);
+            });
     });
 
-/*   it('login failed', (done) => {
+    /*   it('login failed', (done) => {
         request(app.app)
             .post('/api/v1/auth/login')
             .send(invalidUserCredentials)
