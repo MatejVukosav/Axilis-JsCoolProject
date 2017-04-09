@@ -113,7 +113,34 @@ function deleteFavorite(userId, movieId) {
     return deferred.promise;
 }
 
+function getFavorite(userId) {
+    console.log('getFavorite');
+
+    let deferred = Q.defer();
+
+    if (!userId) {
+        return deferred.reject('User id is mandatory');
+    }
+
+    User
+        .findOne({username: userId})
+        .exec((_err, _user) => {
+            if (_err) {
+                return deferred.reject(500);
+            }
+
+            if (!_user) {
+                return deferred.reject(404);
+            }
+
+            return deferred.resolve(_user.favorites);
+        });
+
+    return deferred.promise;
+}
+
 module.exports = {
     addFavorite,
-    deleteFavorite
+    deleteFavorite,
+    getFavorite
 }

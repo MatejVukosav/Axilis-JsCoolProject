@@ -45,8 +45,26 @@ function deleteFavorite(req, res) {
         });
 }
 
+function getUserFavoritesFavorite(req, res) {
+    const userId = req.params.userId;
+    if (!userId) {
+        return deferred.reject("User id is missing");
+    }
+
+    FavoriteService
+        .getFavorite(userId)
+        .then((favorites) => {
+            return res
+                .status(200)
+                .json(favorites);
+        })
+        .catch((_err) => {
+            return res.sendStatus(_err);
+        });
+}
 
 module.exports = {
     addFavorite,
-    deleteFavorite
+    deleteFavorite,
+    getUserFavoritesFavorite
 }

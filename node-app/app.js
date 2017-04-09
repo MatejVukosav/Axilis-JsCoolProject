@@ -42,6 +42,7 @@ app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '127.0.0.1');
+  res.setHeader('Content-Type', 'application/json');
   next();
 });
 

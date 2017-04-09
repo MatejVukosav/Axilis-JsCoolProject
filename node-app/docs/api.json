@@ -2,7 +2,7 @@
 localhost: 3000/api/v1
 
 //check server health
-/
+GET /
 return html.. Welcome to Express 
 
 
@@ -60,3 +60,15 @@ Header:[
     key: Authorization value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdGVqIiwiaWF0IjoxNDkxNjkyMjcxfQ.W2D4MJhnEVncmZHmOTkS6hhzAN9DwNOnBt8Lhq9PDxo
 ]
 response: 200 OK
+
+
+//dohvat favorita od usera
+GET /users/:username/favorites
+Header:[
+    key: Authorization value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdGVqIiwiaWF0IjoxNDkxNjkyMjcxfQ.W2D4MJhnEVncmZHmOTkS6hhzAN9DwNOnBt8Lhq9PDxo
+]
+
+response:
+[
+ 2,3   
+]
