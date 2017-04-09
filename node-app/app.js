@@ -147,3 +147,8 @@ app.use(expressWinston.logger({
   msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
   colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
 }));
+
+
+module.exports = {
+  app
+}
