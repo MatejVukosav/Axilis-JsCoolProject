@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
 import MovieInfoComponent from './Components/MovieInfoComponent'
 import 'bootswatch/superhero/bootstrap.css';
-import Movie from './Components/Movie';
+import MoviesBox from './Components/MoviesBox';
 
 const Navigation = () => {
     return (
@@ -32,7 +32,7 @@ const DummySearch = () => {
 };
 const DummyLogout = () => {
     return (
-        <h1><Movie id="tt0106062"/></h1>
+        <h1>logout</h1>
     )
 };
 
@@ -44,7 +44,11 @@ const Dummy404 = () => {
             <b>404</b>: This is not the page you are looking for
         </h2>
     )
-}
+};
+
+/* 
+TODO: This should not be here
+
 
 setMovieFavorite(_id, isWatched) {
     let newListOfMovies = this.state.movies.map(m => {
@@ -65,48 +69,52 @@ setMovieFavorite(_id, isWatched) {
       // };
 
     // return newMovieObject;
-    });
+}
+);
+};
 
-    this.setState({
-      movies: newListOfMovies
-    });
-  }
+this.setState({movies: newListOfMovies});
+};
 
-  handleLoginInputChange(event) {
-    this.setState({
-      username: event.target.value
-    });
-  }
+handleLoginInputChange(event) {
+this.setState({username: event.target.value});
+};
 
-  const WrappedFavorites = () => {
-      return {
-          <DummyFavorites setMovieFavoriteChangedEvent = {this.setMovieFavorite}></DummyFavorites>
-      }
-  }
-     
-  }
+const WrappedFavorites = () => {
+return ( < DummyFavorites setMovieFavoriteChangedEvent = {
+        this.setMovieFavorite
+    } > </DummyFavorites>
+)
+};
+*/
 
+const WrappedMoviesBox = () => { return (
+    <MoviesBox ids={["tt0106062", "tt0120737", "tt0079470"]} />
+)
+};
 
 class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <Router>
-                    <div>
-                        <div style={{float: "right"}}>
-                            <Navigation/>
-                        </div>
-                        <Switch>
-                            <Route exact path="/" component={DummyFavorites}/>
-                            <Route exact path="/search" component={DummySearch}/>
-                            <Route exact path="/logout" component={DummyLogout}/>
-                            <Route path="*" component={Dummy404}/>
-                        </Switch>
-                    </div>
-                </Router>
+render() {
+return (
+    <div className="App">
+        <Router>
+            <div>
+                <div style={{
+                    float: "right"
+                }}>
+                    <Navigation/>
+                </div>
+                <Switch>
+                    <Route exact path="/" component={WrappedMoviesBox}/>
+                    <Route exact path="/search" component={DummySearch}/>
+                    <Route exact path="/logout" component={DummyLogout}/>
+                    <Route path="*" component={Dummy404}/>
+                </Switch>
             </div>
-        );
-    }
+        </Router>
+    </div>
+);
+}
 }
 
 export default App;

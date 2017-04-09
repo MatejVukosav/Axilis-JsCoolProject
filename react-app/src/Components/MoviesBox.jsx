@@ -13,9 +13,14 @@ class MoviesBox extends Component {
                 let request = "http://www.omdbapi.com/?i=" + id;
                 fetch(request).then((response) => response.json()).then((movie) => {
                     title = movie["Title"];
+                    console.log(movie["Title"]);
                     year = movie["Year"];
                 });
-                return (<Movie title={title} year={year}/>);
+                // TODO: WAIT HERE
+                console.log(request);
+                console.log(id);
+                console.log(title);
+                return (<Movie key={id} title={title} year={year}/>);
             });
 
         return (
