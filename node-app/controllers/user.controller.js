@@ -1,6 +1,8 @@
 'use strict';
 
-const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
+
 const User = require('../models/user.model');
 
 const UserService = require('../services/user.service');
@@ -8,18 +10,36 @@ const UserViewModel = require('../viewModels/user.viewModel');
 
 function login(req, res) {
     const username = req.body.username;
+
+    if (!username) {
+        return res.json('Username is mandatory');
+    }
+
     UserService
         .getUser(username)
         .then((user) => {
-            res.json(new UserViewModel(user));
+            const token = jwt.sign({
+                username: username
+            }, config.data.jwtSecret)
+
+            if (!token) {
+                return res.sendStatus(500);
+            }
+
+            return res.json({token, user: new UserViewModel(user)});
         })
         .catch((_err) => {
             //ako ga rejecta
-            res.sendStatus(_err);
+            return res.sendStatus(_err);
         });
 }
 
-function createUser(req, res) {
+function logout(req, res) {
+    const username = req.body.username;
+    return res.json('User ' + username + ' logout');
+}
+
+function register(req, res) {
     const user = new User(req.body);
 
     UserService
@@ -34,5 +54,6 @@ function createUser(req, res) {
 
 module.exports = {
     login,
-    createUser
+    logout,
+    register
 }

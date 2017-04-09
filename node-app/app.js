@@ -6,14 +6,21 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const expressWinston = require('express-winston');
+const winstonInstance = require('winston');
+const router = express.Router();
 
 const debug = require('debug')('axiliscoolproject:server');
 const http = require('http');
 
-const loginRoutes = require('./routes/login.routes')
+const authRoutes = require('./routes/auth.routes')
 const indexRoutes = require('./routes/index.routes');
+const favoritesRoutes = require('./routes/favorites.routes');
+
+const {authenticationMiddleware} = require('./middlewares/authentication.middleware');
 
 const app = express();
+const config = require('./config');
 
 // Normalize a port into a number, string, or false.
 function normalizePort(val) {
@@ -48,19 +55,20 @@ app.use(cookieParser());
 
 //define routes
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/login', loginRoutes);
-app.use('/', indexRoutes);
+app.use('/api/v1', router);
+router.use('/auth', authRoutes);
+router.use('/users', favoritesRoutes);
+router.use('/', authenticationMiddleware, indexRoutes);
 
-//react
-//app.use('/static', express.static(path.join(__dirname, 'react', 'build', 'static')));
-//app.use('/*', (req, res) => res.sendFile('./react/build/index.html', {root: __dirname}));
-
-const MONGO_STRING = "mongodb://axilis:axilis@ds155130.mlab.com:55130/ajssproject"
+// react app.use('/static', express.static(path.join(__dirname, 'react',
+// 'build', 'static'))); app.use('/*', (req, res) =>
+// res.sendFile('./react/build/index.html', {root: __dirname}));
 
 const mongoose = require('mongoose');
 //mongoose.connect(process.env['MONGO_STRING'],
-mongoose.connect(MONGO_STRING, (err) => {
+mongoose.connect(config.data.MONGO_STRING, (err) => {
   if (err) {
+    console.log(config.MONGO_STRING);
     return console.error(err);
   }
   console.log('Database connection successful!');
@@ -131,3 +139,10 @@ function onListening() {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+//winston
+app.use(expressWinston.logger({
+  winstonInstance, meta: true, // optional: log meta data about request (defaults to true)
+  msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
+  colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
+}));

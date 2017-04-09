@@ -11,7 +11,6 @@ function createUser(username) {
     const user = new User({username});
     user.save((_err) => {
         if (_err) {
-            //ide u catch blok
             return deferred.reject(500);
         }
 
@@ -29,13 +28,11 @@ function getUser(username) {
         .findOne({username: username})
         .exec((_err, _user) => {
             if (_err) {
-                   console.log(_err);
+                console.log(_err);
                 return deferred.reject(500);
             }
-                   console.log("dsad");
 
             if (_user) {
-             
                 return deferred.resolve(_user);
             } else {
                 createUser(username).then((user) => {
