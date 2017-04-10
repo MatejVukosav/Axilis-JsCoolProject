@@ -36,15 +36,4 @@ describe('## Auth APIs', () => {
                 done();
             });
     });
-
-    /*   it('login failed', (done) => {
-        request(app.app)
-            .post('/api/v1/auth/login')
-            .send(invalidUserCredentials)
-            .expect(httpStatus.NOT_FOUND)
-            .then((err, res) => {
-                done();
-            })   .catch(done);
-    });*/
-
 });

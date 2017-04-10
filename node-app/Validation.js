@@ -1,3 +1,7 @@
+const config = require('./config');
+const jwt = require('jsonwebtoken');
+const Q = require('q');
+
 var algorithm = 'aes-256-ctr';
 var privateKey = '37LvDSm4XvjYOh9r';
 
@@ -16,7 +20,30 @@ function encrypt(password) {
     return crypted;
 }
 
+function sign(username) {
+    const token = jwt.sign({
+        username: username
+    }, config.data.jwtSecret)
+
+    return token;
+}
+
+//how to??
+function verify(token) {
+    let deferred = Q.defer();
+
+    jwt.verify(token, config.data.jwtSecret, (_err) => {
+        if (_err) {
+            console.log(_err);
+            return deferred.reject(401);
+        }
+        return deferred.resolve(200);
+    });
+}
+
 module.exports = {
     decrypt,
-    encrypt
+    encrypt,
+    sign,
+    verify
 }

@@ -1,7 +1,6 @@
 'use strict';
 
-const jwt = require('jsonwebtoken');
-const config = require('../config');
+const validation = require('../validation');
 
 const User = require('../models/user.model');
 
@@ -18,9 +17,7 @@ function login(req, res) {
     UserService
         .getUser(username)
         .then((user) => {
-            const token = jwt.sign({
-                username: username
-            }, config.data.jwtSecret)
+            const token = validation.sign(username);
 
             if (!token) {
                 return res.sendStatus(500);
