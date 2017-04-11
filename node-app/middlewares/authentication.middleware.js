@@ -4,19 +4,18 @@ const config = require('../config');
 
 function authenticationMiddleware(req, res, next) {
     const token = req.headers['authorization']
-    jwt.verify(token, config.data.jwtSecret, (_err) => {
+/*    jwt.verify(token, config.data.jwtSecret, (_err) => {
         if (_err) {
             return res
                 .status(401)
                 .end();
         }
         next();
-    });
+    });*/
 
-    //doesn't work??
-    /*validation.verify(token)
+    validation.verify(token)
     .then(() => {
-            console.log("verified")
+            console.log("Token verified")
             next();
         })
         .catch((_err) => {
@@ -24,7 +23,7 @@ function authenticationMiddleware(req, res, next) {
             return res
                 .status(401)
                 .end();
-        });*/
+        });
 
 }
 

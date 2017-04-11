@@ -28,7 +28,6 @@ function sign(username) {
     return token;
 }
 
-//how to??
 function verify(token) {
     let deferred = Q.defer();
 
@@ -39,6 +38,8 @@ function verify(token) {
         }
         return deferred.resolve(200);
     });
+
+    return deferred.promise
 }
 
 module.exports = {
