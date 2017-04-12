@@ -1,3 +1,4 @@
+const HttpStatus = require('http-status-codes');
 const config = require('./config');
 const jwt = require('jsonwebtoken');
 const Q = require('q');
@@ -34,9 +35,9 @@ function verify(token) {
     jwt.verify(token, config.data.jwtSecret, (_err) => {
         if (_err) {
             console.log(_err);
-            return deferred.reject(401);
+            return deferred.reject(HttpStatus.UNAUTHORIZED);
         }
-        return deferred.resolve(200);
+        return deferred.resolve(HttpStatus.Ok);
     });
 
     return deferred.promise
