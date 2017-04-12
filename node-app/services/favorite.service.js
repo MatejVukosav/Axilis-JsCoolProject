@@ -1,30 +1,31 @@
 'use strict'
 
+const HttpStatus = require('http-status-codes');
 const Q = require('q');
 const User = require('../models/user.model');
 
 function addFavorite(userId, movieId) {
-    console.log('addFavorite');
+    //console.log('addFavorite');
 
     let deferred = Q.defer();
 
     if (!userId) {
-        return deferred.reject("User id is missing");
+        return deferred.reject("User id is missing!");
     }
 
     if (!movieId) {
-        return deferred.reject("MovieS id is missing");
+        return deferred.reject("Movies id is missing!");
     }
 
     User
         .findOne({username: userId})
         .exec((_err, _user) => {
             if (_err) {
-                return deferred.reject(500);
+                return deferred.reject(HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
             if (!_user) {
-                return deferred.reject(404);
+                return deferred.reject(HttpStatus.NOT_FOUND);
             }
             //find user, update favorites
             if (!_user.favorites) {
@@ -44,14 +45,14 @@ function addFavorite(userId, movieId) {
 
                 _user.save((_err, user) => {
                     if (_err) {
-                        return deferred.reject(500);
+                        return deferred.reject(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
 
-                    return deferred.resolve(200);
+                    return deferred.resolve(HttpStatus.OK);
                 })
             } else {
                 //already in favorites
-                return deferred.reject(409);
+                return deferred.reject(HttpStatus.CONFLICT);
             }
         });
 
@@ -74,16 +75,16 @@ function deleteFavorite(userId, movieId) {
         .findOne({username: userId})
         .exec((_err, _user) => {
             if (_err) {
-                return deferred.reject(500);
+                return deferred.reject(HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
             if (!_user) {
-                return deferred.reject(404);
+                return deferred.reject(HttpStatus.NOT_FOUND);
             }
             //find user, update favorites
 
             if (!_user.favorites) {
-                return deferred.resolve(200);
+                return deferred.resolve(HttpStatus.OK);
             }
 
             // is it valid?
@@ -94,20 +95,21 @@ function deleteFavorite(userId, movieId) {
                 : true;
 
             if (ifMovieIsFavorite) {
-
+                //if is favorite,remove it
                 _user
                     .favorites
                     .pull(movieId);
 
                 _user.save((_err) => {
                     if (_err) {
-                        return deferred.reject(500);
+                        return deferred.reject(HttpStatus.INTERNAL_SERVER_ERROR);
                     }
 
-                    return deferred.resolve(200);
+                    return deferred.resolve(HttpStatus.OK);
                 })
             }
-            return deferred.resolve(200);
+            //it wasn't in favorites,so nothing changed
+            return deferred.resolve(HttpStatus.NOT_MODIFIED);
         });
 
     return deferred.promise;
@@ -126,11 +128,11 @@ function getFavorite(userId) {
         .findOne({username: userId})
         .exec((_err, _user) => {
             if (_err) {
-                return deferred.reject(500);
+                return deferred.reject(HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
             if (!_user) {
-                return deferred.reject(404);
+                return deferred.reject(HttpStatus.NOT_FOUND);
             }
 
             return deferred.resolve(_user.favorites);

@@ -1,9 +1,8 @@
 'use strict';
 
+const HttpStatus = require('http-status-codes');
 const validation = require('../validation');
-
 const User = require('../models/user.model');
-
 const UserService = require('../services/user.service');
 const UserViewModel = require('../viewModels/user.viewModel');
 
@@ -11,7 +10,7 @@ function login(req, res) {
     const username = req.body.username;
 
     if (!username) {
-        return res.json('Username is mandatory');
+        return res.json('Username is mandatory!');
     }
 
     UserService
@@ -20,7 +19,7 @@ function login(req, res) {
             const token = validation.sign(username);
 
             if (!token) {
-                return res.sendStatus(500);
+                return res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
             return res.json({token, user: new UserViewModel(user)});
@@ -42,7 +41,7 @@ function register(req, res) {
     UserService
         .createUser(user)
         .then(() => {
-            res.sendStatus(200);
+            res.sendStatus(HttpStatus.OK);
         })
         .catch((_err) => {
             res.sendStatus(_err);
