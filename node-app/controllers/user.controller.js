@@ -10,7 +10,7 @@ function login(req, res) {
     const username = req.body.username;
 
     if (!username) {
-        return res.json('Username is mandatory!');
+        return res.sendStatus(HttpStatus.BAD_REQUEST);
     }
 
     UserService
@@ -25,7 +25,6 @@ function login(req, res) {
             return res.json({token, user: new UserViewModel(user)});
         })
         .catch((_err) => {
-            //ako ga rejecta
             return res.sendStatus(_err);
         });
 }

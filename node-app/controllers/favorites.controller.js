@@ -6,13 +6,10 @@ const UserViewModel = require('../viewModels/user.viewModel');
 
 function addFavorite(req, res) {
     const userId = req.params.userId;
-    if (!userId) {
-        return deferred.reject("User id is missing");
-    }
-
     const movieId = req.params.movieId;
-    if (!movieId) {
-        return deferred.reject("MovieS id is missing");
+
+    if (!userId || !movieId) {
+        return res.sendStatus(HttpStatus.BAD_REQUEST);
     }
 
     FavoriteService
@@ -27,13 +24,9 @@ function addFavorite(req, res) {
 
 function deleteFavorite(req, res) {
     const userId = req.params.userId;
-    if (!userId) {
-        return deferred.reject("User id is missing");
-    }
-
     const movieId = req.params.movieId;
-    if (!movieId) {
-        return deferred.reject("MovieS id is missing");
+    if (!userId || !movieId) {
+        return res.sendStatus(HttpStatus.BAD_REQUEST);
     }
 
     FavoriteService
@@ -49,7 +42,7 @@ function deleteFavorite(req, res) {
 function getUserFavoritesFavorite(req, res) {
     const userId = req.params.userId;
     if (!userId) {
-        return deferred.reject("User id is missing");
+        return res.sendStatus(HttpStatus.BAD_REQUEST);
     }
 
     FavoriteService

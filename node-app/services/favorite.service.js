@@ -6,16 +6,7 @@ const User = require('../models/user.model');
 
 function addFavorite(userId, movieId) {
     //console.log('addFavorite');
-
     let deferred = Q.defer();
-
-    if (!userId) {
-        return deferred.reject("User id is missing!");
-    }
-
-    if (!movieId) {
-        return deferred.reject("Movies id is missing!");
-    }
 
     User
         .findOne({username: userId})
@@ -60,16 +51,8 @@ function addFavorite(userId, movieId) {
 }
 
 function deleteFavorite(userId, movieId) {
-    console.log('deleteFavorite');
-
+    // console.log('deleteFavorite');
     let deferred = Q.defer();
-
-    if (!userId) {
-        return deferred.reject('User id is mandatory');
-    }
-    if (!movieId) {
-        return deferred.reject('Movie id is mandatory');
-    }
 
     User
         .findOne({username: userId})
@@ -116,13 +99,9 @@ function deleteFavorite(userId, movieId) {
 }
 
 function getFavorite(userId) {
-    console.log('getFavorite');
+    //console.log('getFavorite');
 
     let deferred = Q.defer();
-
-    if (!userId) {
-        return deferred.reject('User id is mandatory');
-    }
 
     User
         .findOne({username: userId})

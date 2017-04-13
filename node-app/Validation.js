@@ -3,11 +3,8 @@ const config = require('./config');
 const jwt = require('jsonwebtoken');
 const Q = require('q');
 
-var algorithm = 'aes-256-ctr';
-var privateKey = '37LvDSm4XvjYOh9r';
-
 function decrypt(password) {
-    var decipher = crypto.createDecipher(algorithm, privateKey);
+    var decipher = crypto.createDecipher(config.algorithm, config.algorithmPrivateKey);
     var dec = decipher.update(password, 'hex', 'utf8');
     dec += decipher.final('utf8');
     return dec;
@@ -15,7 +12,7 @@ function decrypt(password) {
 
 // method to encrypt data(password)
 function encrypt(password) {
-    var cipher = crypto.createCipher(algorithm, privateKey);
+    var cipher = crypto.createCipher(config.algorithm, config.algorithmPrivateKey);
     var crypted = cipher.update(password, 'utf8', 'hex');
     crypted += cipher.final('hex');
     return crypted;
