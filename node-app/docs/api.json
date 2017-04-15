@@ -17,8 +17,7 @@ response{
     "user": {
         "username": "matej",
         "favorites": [
-            3,
-            2
+            "tt0103776"
         ]
     }
 }
@@ -55,7 +54,7 @@ Header:[
 response: 200 OK
 
 //Delete favorite
-POST /users/:username/favorites/:movieId
+DELETE /users/:username/favorites/:movieId
 Header:[
     key: Authorization value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdGVqIiwiaWF0IjoxNDkxNjkyMjcxfQ.W2D4MJhnEVncmZHmOTkS6hhzAN9DwNOnBt8Lhq9PDxo
 ]
@@ -70,5 +69,5 @@ Header:[
 
 response:
 [
- 2,3   
+ "tt0103776"  
 ]

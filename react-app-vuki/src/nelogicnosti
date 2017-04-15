@@ -1,0 +1,7 @@
+-kako staviti da iz homeComponenta mogu klikom na film otvoriti detalje filma
+-nakon sto App otvori LoginComponent i tamo se ulogiram, gdje spremim usera
+-kako poslje validiram da je on ulogiran, gdje je njegovo stanje
+-zasto nakon restarta react appa vise stari linkovi ne rade sve dok ne odem na '/'
+-zasto nema slike na dugmicu na u jednoj movie kartici
+-kako kod logouta izbacit skroz korisnika na samu LoginComponentu, bez headera i footera koje mi doda home komponenta
+-kako uklopiti redux u ovaj primjer

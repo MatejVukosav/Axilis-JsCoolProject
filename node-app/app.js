@@ -54,6 +54,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(cookieParser());
 
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Acc" +
+      "ess-Control-Request-Method, Access-Control-Request-Headers");
+
+  next();
+});
+
 //define routes
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1', router);
@@ -147,7 +156,6 @@ app.use(expressWinston.logger({
   msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
   colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
 }));
-
 
 module.exports = {
   app

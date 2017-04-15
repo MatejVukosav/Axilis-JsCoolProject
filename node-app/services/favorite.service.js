@@ -67,7 +67,7 @@ function deleteFavorite(userId, movieId) {
             //find user, update favorites
 
             if (!_user.favorites) {
-                return deferred.resolve(HttpStatus.OK);
+                return deferred.resolve(HttpStatus.NOT_MODIFIED);
             }
 
             // is it valid?
@@ -78,6 +78,7 @@ function deleteFavorite(userId, movieId) {
                 : true;
 
             if (ifMovieIsFavorite) {
+
                 //if is favorite,remove it
                 _user
                     .favorites

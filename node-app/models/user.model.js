@@ -9,7 +9,7 @@ const userSchema = new Schema({
         required: true
     },
     favorites: {
-        type: [Number]
+        type: [String]
     }
 })
 
